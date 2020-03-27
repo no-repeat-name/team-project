@@ -1,0 +1,69 @@
+export default [{
+    key: '1',
+    icon: "home",
+    title: '首页',
+    path: '/admin/home'
+}, {
+    key: '2',
+    icon: 'user',
+    title: '管理员',
+    path: '/admin/administartor'
+}, {
+    key: '3',
+    icon: "desktop",
+    title: '用户管理',
+    path: '/admin/user',
+    children: [{
+            key: '3-1',
+            title: "用户添加",
+            path: '/admin/useradd'
+        },
+        {
+            key: '3-2',
+            title: "用户列表",
+            path: '/admin/userlist'
+        }
+    ]
+}, {
+    key: '4',
+    icon: "shopping",
+    title: '商品管理',
+    path: '/admin/goods',
+    children: [{
+            key: '4-1',
+            title: '商品信息',
+            path: '/admin/goodsInfo'
+        },
+        {
+            key: '4-2',
+            title: '商品类别',
+            path: '/admin/goodsKind'
+        }
+    ]
+}, {
+    key: '5',
+    icon: 'area-chart',
+    title: "数据统计",
+    path: '/admin/echarts',
+    children: [{
+            key: '5-1',
+            title: '饼状图',
+            path: '/admin/echarts/pie'
+        },
+        {
+            key: '5-2',
+            title: '折线图',
+            path: '/admin/echarts/line'
+        },
+        {
+            key: '5-3',
+            title: '柱状图',
+            path: '/admin/echarts/bar'
+        },
+    ]
+},  {
+    key: '9',
+    icon: "setting",
+    title: '设置',
+    path: '/admin/set'
+}]

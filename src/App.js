@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Redirect } from 'react-router-dom'
 import Admin from './pages/Admin'
 import Login from './pages/Login'
+import Administartor from './pages/Administartor'//zxz的管理员管理组件
 
 class App extends Component {
   render() {
@@ -12,7 +13,9 @@ class App extends Component {
         <Route path='/admin' render={() => {
           return (
             <Admin>
-              {/* <Route path='/admin/user' component={User}></Route> */}
+              {/* zxz */}
+              <Route path='/admin/administartor' component={Administartor}></Route>
+              {/* zxz */}
             </Admin>
           )
         }

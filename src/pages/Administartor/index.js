@@ -6,11 +6,11 @@ class Administartor extends Component {
 
     state={
         dataSource:[
-            {_id:1,userName:'zxz',}
+            {_id:1,admin:'zxz',}
         ],
         columns:[
             {title:'id',dataIndex:'_id',key:'_id'},
-            {title:'管理员',dataIndex:'userName',key:'userName'},
+            {title:'管理员',dataIndex:'admin',key:'admin'},
             {title:'操作',key:'cz',render:(item)=>{
                 return (<div>
                      <Popconfirm
@@ -34,14 +34,16 @@ class Administartor extends Component {
 // ---------------------------------------------------------------------------------------------------------
     del = async (_id)=>{//删除管理员函数
         let result = await administartorapi.del(_id)
-        if('返回判断条件'){return false}
+        if(result.err){return false}
         this.refreshList();
     }
 // --------------------------------------------------------------------------------------------------------------
     refreshList = async ()=>{//管理员列表渲染函数
-        this.setState({spinning:false})
+        this.setState({spinning:true})
         let result = await administartorapi.list()
-        this.setState({dataSource:'返回数据的管理员数组',spinning:false})
+        // console.log(result.data.list);
+        
+        this.setState({dataSource:result.data.list,spinning:false})
     }
 // ---------------------------------------------------------------------------------------------------------------
     componentDidMount(){//一挂载就渲染管理员列表
@@ -52,10 +54,12 @@ class Administartor extends Component {
 
 // -----------------------------------------------------------------------------------------------------------
     handleOk = async ()=>{//管理员添加函数
-        let userName = this.refs.us.value
+        let admin = this.refs.us.value
         let passWord = this.refs.ps.value
-        let result = await administartorapi.add({userName,passWord})
-        if ('返回结果判断'){ return notification.error({description:'管理员添加失败，请详细检查传输',message:'错误',duration:1.5})}
+        let result = await administartorapi.add(admin,passWord)
+        console.log(result);
+        
+        if (result.err){ return notification.error({description:'管理员添加失败，请详细检查传输',message:'错误',duration:1.5})}
         notification.success({description:'管理员添ok，模态框即将关闭',message:'成功',duration:1.5})
         this.setState({visible:false})
         this.refreshList()
@@ -80,7 +84,7 @@ class Administartor extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          userName:<input type="text" ref='us'/><br/>
+          admin:<input type="text" ref='us'/><br/>
           passWord:<input type="text" ref='ps'/><br/>
         </Modal>
 

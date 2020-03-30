@@ -1,19 +1,11 @@
 import React, { Component } from 'react'
+import { Spin } from 'antd'
 import ReactEcharts from 'echarts-for-react'
 import Api from '../../api/analysis'
 
 class InventoryStatistics extends Component {
-    refreshList = async () => {
-        let result = await Api.kindList()
-        console.log(result)
-    }
-
-    componentDidMount() {
-        this.refreshList()
-    }
-
-    getOption() {
-        return {
+    state = {
+        option: {
             title: {
                 text: '',
                 subtext: '',
@@ -26,7 +18,7 @@ class InventoryStatistics extends Component {
             legend: {
                 orient: 'vertical',
                 left: '10%',
-                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+                data: []
             },
             series: [
                 {
@@ -48,21 +40,38 @@ class InventoryStatistics extends Component {
                     labelLine: {
                         show: false
                     },
-                    data: [
-                        { value: 335, name: '直接访问' },
-                        { value: 310, name: '邮件营销' },
-                        { value: 234, name: '联盟广告' },
-                        { value: 135, name: '视频广告' },
-                        { value: 1548, name: '搜索引擎' }
-                    ]
+                    data: []
                 }
             ]
-        }
+        },
+        spinning: false
+    }
+
+    refreshList = async () => {
+        let shopList = (await Api.kindList()).data.data
+        let echartsList = []
+        let menuList = []
+        shopList.map((item, index) => {
+            echartsList.push({ name: item.type, value: item.stock })
+            menuList.push(item.type)
+        })
+        let { option } = JSON.parse(JSON.stringify(this.state))
+        option.legend.data = menuList
+        option.series[0].data = echartsList
+        this.setState({ option, spinning: false })
+    }
+
+    componentDidMount() {
+        this.setState({ spinning: true })
+        this.refreshList()
     }
 
     render() {
+        let { spinning, option } = this.state
         return (
-            <ReactEcharts option={this.getOption()} />
+            <Spin spinning={spinning}>
+                <ReactEcharts option={option} />
+            </Spin>
         )
     }
 }

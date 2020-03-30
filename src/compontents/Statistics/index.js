@@ -6,7 +6,7 @@ import { Card } from 'antd'
 const tabList = [
     {
         key: 'tab1',
-        tab: '销售额类别占比',
+        tab: '销售类别占比',
     },
     {
         key: 'tab2',

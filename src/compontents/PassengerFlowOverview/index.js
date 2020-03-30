@@ -1,50 +1,51 @@
 import React, { Component } from 'react'
+import { Spin } from 'antd'
 import ReactEcharts from 'echarts-for-react'
+import Api from '../../api/analysis'
 
 class PassengerFlowOverview extends Component {
-    getOption() {
-        return {
-            color: ['#3398DB'],
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
+    state = {
+        option: {
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
             },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
+            yAxis: {
+                type: 'value'
             },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月','九月','十月','十一月','十二月'],
-                    axisTick: {
-                        alignWithLabel: true
-                    }
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    name: '直接访问',
-                    type: 'bar',
-                    barWidth: '60%',
-                    data: [10, 52, 200, 334, 390, 330, 220]
-                }
-            ]
+            series: [{
+                data: [],
+                type: 'line',
+                areaStyle: {}
+            }]
+        },
+        spinning: false
+    }
+
+    refreshList = async () => {
+        let dataList = []
+        let length = this.state.option.xAxis.data.length
+        for (let index = 0; index < length; index++) {
+            let visit = (await Api.random()).data.number
+            dataList.push(visit)
         }
+        let { option } = JSON.parse(JSON.stringify(this.state))
+        option.series[0].data = dataList
+        this.setState({ option, spinning: false })
+    }
+
+    componentDidMount() {
+        this.setState({ spinning: true })
+        this.refreshList()
     }
 
     render() {
+        let { spinning, option } = this.state
         return (
-            <ReactEcharts option={this.getOption()} />
+            <Spin spinning={spinning}>
+                <ReactEcharts option={option} />
+            </Spin>
         )
     }
 }

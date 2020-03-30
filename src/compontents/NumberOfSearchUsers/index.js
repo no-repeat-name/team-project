@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { Spin } from 'antd'
 import ReactEcharts from 'echarts-for-react'
+import Api from '../../api/analysis'
 
 class NumberOfSearchUsers extends Component {
-    getOption() {
-        return {
+    state = {
+        option: {
             title: {
                 text: '搜索用户数',
                 subtext: '',
@@ -17,17 +19,37 @@ class NumberOfSearchUsers extends Component {
                 type: 'value'
             },
             series: [{
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                data: [],
                 type: 'line',
                 smooth: true
             }]
-        }
+        },
+        spinning: false
+    }
 
+    refreshList = async () => {
+        let dataList = []
+        let length = this.state.option.xAxis.data.length
+        for (let index = 0; index < length; index++) {
+            let visit = (await Api.random()).data.number
+            dataList.push(visit)
+        }
+        let { option } = JSON.parse(JSON.stringify(this.state))
+        option.series[0].data = dataList
+        this.setState({ option, spinning: false })
+    }
+
+    componentDidMount() {
+        this.setState({ spinning: true })
+        this.refreshList()
     }
 
     render() {
+        let { spinning, option } = this.state
         return (
-                <ReactEcharts option={this.getOption()} />
+            <Spin spinning={spinning}>
+                <ReactEcharts option={option} />
+            </Spin>
         )
     }
 }

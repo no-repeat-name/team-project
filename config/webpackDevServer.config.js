@@ -101,12 +101,21 @@ module.exports = function (proxy, allowedHost) {
     },
     public: allowedHost,
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
+<<<<<<< HEAD
     proxy: {
       '/admin': {
         target: '47.92.229.63:3555/',
         changeOrigin: true,
         pathRewrite: {
           "^/admin": ''
+=======
+    proxy:{
+      '/hehe':{
+        target:'http://47.92.229.63:3555/',//----已经配置了 ---
+        changeOrigin:true,
+        pathRewrite:{
+          "^/hehe":''
+>>>>>>> 32229f098e0fca6751d1dda12d6c4760d315e1e1
         }
       }
     },

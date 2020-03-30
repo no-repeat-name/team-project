@@ -43,25 +43,14 @@ export default [{
 }, {
     key: '5',
     icon: 'area-chart',
-    title: "数据统计",
-    path: '/admin/echarts',
+    title: "统计分析",
+    path: '/admin',
     children: [{
-            key: '5-1',
-            title: '饼状图',
-            path: '/admin/echarts/pie'
-        },
-        {
-            key: '5-2',
-            title: '折线图',
-            path: '/admin/echarts/line'
-        },
-        {
-            key: '5-3',
-            title: '柱状图',
-            path: '/admin/echarts/bar'
-        },
-    ]
-},  {
+        key: '5-1',
+        title: '数据分析',
+        path: '/admin/analysis'
+    }]
+}, {
     key: '9',
     icon: "setting",
     title: '设置',

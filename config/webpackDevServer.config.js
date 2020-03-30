@@ -103,7 +103,7 @@ module.exports = function (proxy, allowedHost) {
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
     proxy: {
       '/admin': {
-        target: '47.92.229.63:3555/',
+        target: 'http://47.92.229.63:3555/',
         changeOrigin: true,
         pathRewrite: {
           "^/admin": ''

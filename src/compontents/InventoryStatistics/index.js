@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import ReactEcharts from 'echarts-for-react'
+import Api from '../../api/analysis'
 
 class InventoryStatistics extends Component {
+    refreshList = async () => {
+        let result = await Api.kindList()
+        console.log(result)
+    }
+
+    componentDidMount() {
+        this.refreshList()
+    }
+
     getOption() {
         return {
             title: {

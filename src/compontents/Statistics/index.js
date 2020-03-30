@@ -10,7 +10,7 @@ const tabList = [
     },
     {
         key: 'tab2',
-        tab: '库存占比',
+        tab: '库存概况',
     },
 ];
 
@@ -33,8 +33,6 @@ class Statistics extends Component {
             <div>
                 <Card
                     style={{ width: '100%' }}
-                    title="Card title"
-                    extra={<a href="#">More</a>}
                     tabList={tabList}
                     activeTabKey={this.state.key}
                     onTabChange={key => {

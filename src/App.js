@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-        <Redirect exact from='/' to='/admin'></Redirect>
+        <Redirect exact from='/' to='/admin/analysis'></Redirect>
         <Route path='/login' component={Login}></Route>
         <Route path='/admin' render={() => {
           return (

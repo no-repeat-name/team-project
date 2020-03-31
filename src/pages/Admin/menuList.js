@@ -36,6 +36,11 @@ export default [{
         },
         {
             key: '4-2',
+            title: '商品添加',
+            path: '/admin/goodsInfoAdd'
+        },
+        {
+            key: '4-3',
             title: '商品类别',
             path: '/admin/goodsKind'
         }

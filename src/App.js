@@ -4,6 +4,10 @@ import Admin from './pages/Admin'
 import Login from './pages/Login'
 import Analysis from './pages/Analysis'
 import Administartor from './pages/Administartor'//zxz的管理员管理组件
+import GoodsList from './pages/Goods/GoodsList'
+import GoodsInfoAdd from './pages/Goods/GoodsAdd'
+import GoodsKind from "./pages/Goods/GoodsKind"
+import GoodsUpdate from "./pages/Goods/GoodsUpdate"
 
 class App extends Component {
   render() {
@@ -18,6 +22,10 @@ class App extends Component {
               {/* zxz */}
               <Route path='/admin/administartor' component={Administartor}></Route>
               {/* zxz */}
+              <Route path='/admin/goodsInfo' component={GoodsList}></Route>
+              <Route path='/admin/goodsInfoAdd' component={GoodsInfoAdd}></Route>
+              <Route path='/admin/goodsKind' component={GoodsKind}></Route>
+              <Route path='/admin/GoodsUpdate' component={GoodsUpdate}></Route>
             </Admin>
           )
         }

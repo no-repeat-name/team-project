@@ -7,8 +7,8 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function handleClick(e) {
-    console.log(e);
-    
+    // console.log(e);
+
     let { path } = e.item.props
     this.props.history.replace(path)
 }

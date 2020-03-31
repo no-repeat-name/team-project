@@ -88,7 +88,7 @@ class GoodsList extends Component {
     let { kindList } = this.state
     let shopList = data.data
     shopList.map((item, index) => {
-      kindList.push(item.type)
+      if (kindList.indexOf(item.type) === -1) { kindList.push(item.type) }
       return index
     })
     this.setState(kindList)
@@ -100,11 +100,11 @@ class GoodsList extends Component {
   handleChange = async (value) => {
     let shopList = (await goodsApi.findall()).data.data
     let result = []
-    if (value == '全部') {
+    if (value === '全部') {
       result = shopList
     } else {
       shopList.map((item, index) => {
-        if (item.type == value) { result.push(shopList[index]) }
+        if (item.type === value) { result.push(shopList[index]) }
         return index
       })
     }
@@ -129,7 +129,7 @@ class GoodsList extends Component {
           类别：
           <Select defaultValue="全部" style={{ width: 200 }} onChange={this.handleChange}>
             <OptGroup label="类型选择">
-              <Option value="全部">全部</Option>
+              <Option value="全部" key={-1}>全部</Option>
               {kindList.map((item, index) => {
                 return (<option value={item} key={index}>{item}</option>)
               })}

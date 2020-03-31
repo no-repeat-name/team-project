@@ -48,12 +48,14 @@ class InventoryStatistics extends Component {
     }
 
     refreshList = async () => {
+        this.setState({ spinning: true })
         let shopList = (await Api.kindList()).data.data
         let echartsList = []
         let menuList = []
         shopList.map((item, index) => {
             echartsList.push({ name: item.type, value: item.stock })
             menuList.push(item.type)
+            return index
         })
         let { option } = JSON.parse(JSON.stringify(this.state))
         option.legend.data = menuList
@@ -62,7 +64,6 @@ class InventoryStatistics extends Component {
     }
 
     componentDidMount() {
-        this.setState({ spinning: true })
         this.refreshList()
     }
 

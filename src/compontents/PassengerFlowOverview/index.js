@@ -24,10 +24,11 @@ class PassengerFlowOverview extends Component {
     }
 
     refreshList = async () => {
+        this.setState({ spinning: true })
         let dataList = []
         let length = this.state.option.xAxis.data.length
         for (let index = 0; index < length; index++) {
-            let visit = (await Api.random()).data.number
+            let visit = (await Api.random()).data.number * 10
             dataList.push(visit)
         }
         let { option } = JSON.parse(JSON.stringify(this.state))
@@ -36,7 +37,6 @@ class PassengerFlowOverview extends Component {
     }
 
     componentDidMount() {
-        this.setState({ spinning: true })
         this.refreshList()
     }
 

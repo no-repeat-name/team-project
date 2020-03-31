@@ -18,7 +18,6 @@ class administartor {
     }
 // ----------------------------------------------------------------------------------
 
-
 }
 
 export default new administartor()

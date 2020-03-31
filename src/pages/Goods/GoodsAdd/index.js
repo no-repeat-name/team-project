@@ -13,8 +13,8 @@ class goodsInfoAdd extends Component {
       "stock":"",
       "putaway":0,
       "price":0,
-      "unit":"",
-      "type":[] 
+      "unit":"份",
+      "type":'面', 
      }
     //上传图片
     upload=async()=>{
@@ -44,7 +44,7 @@ class goodsInfoAdd extends Component {
       // let result = await goodsApi.add(this.state)
       // console.log(result);
       if(err){ return message.error(msg)}
-      console.log(this)
+      console.log(this.state)
       this.props.history.replace('/admin/goodsInfo')
     }
     render() {
@@ -58,17 +58,35 @@ class goodsInfoAdd extends Component {
                 this.setState({desc:e.target.value})
               }}/>
               <Input style={{marginBottom: 10}} addonBefore={'库存'} value={stock} onChange={(e)=>{
-                this.setState({stock:e.target.value})
+                this.setState({stock:Number(e.target.value)})
               }}/> 
                <Input style={{marginBottom: 10}} addonBefore={'价格'}  value={price} onChange={(e)=>{
-                this.setState({price:e.target.value})
+                this.setState({price:Number(e.target.value)})
               }}/>
-               <Input style={{marginBottom: 10}} addonBefore={'单位'}  value={unit} onChange={(e)=>{
+               {/* <Input style={{marginBottom: 10}} addonBefore={'单位'}  value={unit} onChange={(e)=>{
                 this.setState({unit:e.target.value})
-              }} /><br/>
-               <Input style={{marginBottom: 10}} addonBefore={'类别'}  value={type} onChange={(e)=>{
+              }} /><br/> */}
+
+          单位：<select value={unit} style={{ width: 100 , marginRight:50,marginBottom: 20}} onChange={(e)=>{
+              this.setState({unit:e.target.value})
+            }}>
+              <option value={'碗'}>碗</option>
+              <option value={'份'}>份</option>
+              <option value={'个'}>个</option>
+              <option value={'杯'}>杯</option>
+            </select><br/>
+               {/* <Input style={{marginBottom: 10}} addonBefore={'类别'}  value={type} onChange={(e)=>{
                 this.setState({type:e.target.value})
-              }} /><br/>
+              }} /><br/> */}
+              美食分类：<select value={type} style={{ width: 100 , marginRight:50,marginBottom: 20}} onChange={(e)=>{
+              this.setState({type:e.target.value})
+            }}>
+              <option value={'粉'}>美味的粉</option>
+              <option value={'面'}>细软的面</option>
+              <option value={'粥'}>清香的粥</option>
+              <option value={'饭'}>干巴巴的饭</option>
+              <option value={'饮料'}>清爽饮品</option>
+            </select><br/>
               发布状态: 
               {/* <Select  value={putaway}  style={{ width: 100 , marginRight:50}} 
                 onChange={(e)=>{

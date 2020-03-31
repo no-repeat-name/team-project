@@ -28,6 +28,7 @@ class NumberOfSearchUsers extends Component {
     }
 
     refreshList = async () => {
+        this.setState({ spinning: true })
         let dataList = []
         let length = this.state.option.xAxis.data.length
         for (let index = 0; index < length; index++) {
@@ -40,7 +41,6 @@ class NumberOfSearchUsers extends Component {
     }
 
     componentDidMount() {
-        this.setState({ spinning: true })
         this.refreshList()
     }
 

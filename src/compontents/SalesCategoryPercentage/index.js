@@ -26,6 +26,7 @@ class SalesCategoryPercentage extends Component {
     }
 
     refreshList = async () => {
+        this.setState({ spinning: true })
         let shopList = (await Api.kindList()).data.data
         let echartsList = []
         let sellOutList = []
@@ -33,6 +34,7 @@ class SalesCategoryPercentage extends Component {
             let sellOut = parseInt(item.stock * Math.random())
             echartsList.push(item.type)
             sellOutList.push(sellOut)
+            return index
         })
         let { option } = JSON.parse(JSON.stringify(this.state))
         option.xAxis.data = echartsList
@@ -41,7 +43,6 @@ class SalesCategoryPercentage extends Component {
     }
 
     componentDidMount() {
-        this.setState({ spinning: true })
         this.refreshList()
     }
 

@@ -3,6 +3,7 @@ import { HashRouter, Route, Redirect } from 'react-router-dom'
 import Admin from './pages/Admin'
 import Login from './pages/Login'
 import Analysis from './pages/Analysis'
+import Vip from './pages/Vip'
 import Administartor from './pages/Administartor'//zxz的管理员管理组件
 import GoodsList from './pages/Goods/GoodsList'
 import GoodsInfoAdd from './pages/Goods/GoodsAdd'
@@ -18,6 +19,7 @@ class App extends Component {
         <Route path='/admin' render={() => {
           return (
             <Admin>
+              <Route path='/admin/vip' component={Vip}></Route>
               <Route path='/admin/analysis' component={Analysis}></Route>
               {/* zxz */}
               <Route path='/admin/administartor' component={Administartor}></Route>

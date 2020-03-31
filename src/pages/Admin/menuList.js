@@ -56,6 +56,11 @@ export default [{
         path: '/admin/analysis'
     }]
 }, {
+    key: '6',
+    icon: 'contacts',
+    title: '会员管理',
+    path: '/admin/vip'
+}, {
     key: '9',
     icon: "setting",
     title: '设置',

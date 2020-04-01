@@ -1,9 +1,8 @@
 import React, { Component } from "react"
-import { Pagination, Card, message, Table, Tag, Button, Popconfirm, Select } from 'antd'
+import { Pagination, Card, message, Table, Tag, Button, Popconfirm } from 'antd'
 import goodsApi from "../../../api/goods"
 import style from './index.module.less'
 let rootPath = 'http://47.92.229.63:3555'
-const { Option, OptGroup } = Select;
 class GoodsList extends Component {
   state = {
     page: 1,//页码数
@@ -97,7 +96,8 @@ class GoodsList extends Component {
   }
 
   // 选择类型改变
-  handleChange = async (value) => {
+  handleChange = async () => {
+    let value = this.refs.select.value
     let shopList = (await goodsApi.findall()).data.data
     let result = []
     if (value === '全部') {
@@ -127,14 +127,12 @@ class GoodsList extends Component {
             this.props.history.push('/admin/goodsInfoAdd')
           }}>商品添加</Button>
           类别：
-          <Select defaultValue="全部" style={{ width: 200 }} onChange={this.handleChange}>
-            <OptGroup label="类型选择">
-              <Option value="全部" key={-1}>全部</Option>
-              {kindList.map((item, index) => {
-                return (<option value={item} key={index}>{item}</option>)
-              })}
-            </OptGroup>
-          </Select>
+          <select defaultValue='全部' onChange={this.handleChange} ref='select'>
+            <option value='全部'>全部</option>
+            {kindList.map((item, index) => {
+              return (<option value={item} key={index}>{item}</option>)
+            })}
+          </select>
           {/* 表格内容 */}
           <Table style={{ marginTop: 20 }}
             scroll={{ y: 300, x: 840 }}

@@ -75,7 +75,7 @@ class Vip extends Component {
     render() {
         let { dataSource, spinning, columns } = this.state
         return (
-            <Card title='会员列表'>
+            <Card title='会员列表' style={{ marginTop: 20 }}>
                 <Search
                     placeholder="输入相关信息查找"
                     onSearch={value => this.search(value)}

@@ -14,7 +14,7 @@ class Goods {
         return axios.post(url,{_id})
     }
     putAway(_id,putaway){
-        let url = `/admin/shop/putaway`
+        let url = '/admin/shop/putaway'
         return axios.post(url,{_id,putaway})
     }
 }

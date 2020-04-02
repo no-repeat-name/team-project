@@ -79,8 +79,6 @@ class GoodsList extends Component {
   }
   //获取商品数据
   getListData = async () => {
-    // let {page,pageSize} = this.state;
-    // let {type} = this.state;
     let { data, msg, err } = await goodsApi.findall();
     if (err == 0) {
       return message.error(msg)
@@ -118,7 +116,7 @@ class GoodsList extends Component {
 
   render() {
     let { data, columns, count, pageSize, page, kindList } = this.state
-
+    
     return (
       <div className={style.box}>
         <Card title='商品列表' className={style.card}>
@@ -136,7 +134,7 @@ class GoodsList extends Component {
             </OptGroup>
           </Select>
           {/* 表格内容 */}
-          <Table style={{ marginTop: 20 }}
+          <Table 
             scroll={{ y: 300, x: 840 }}
             pagination={false}
             columns={columns}

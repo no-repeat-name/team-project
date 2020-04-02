@@ -88,14 +88,6 @@ class goodsInfoAdd extends Component {
               <option value={'饮料'}>清爽饮品</option>
             </select><br/>
               发布状态: 
-              {/* <Select  value={putaway}  style={{ width: 100 , marginRight:50}} 
-                onChange={(e)=>{
-                  this.setState({putaway:Number(e.target.value)})
-                }}>
-                <Option value={-1}>下架</Option>
-                <Option value={0}>未上架</Option>
-                <Option value={1}>上架</Option>
-              </Select> */}
               <select value={putaway} style={{ width: 100 , marginRight:50}} onChange={(e)=>{
               this.setState({putaway:Number(e.target.value)})
             }}>
@@ -103,24 +95,10 @@ class goodsInfoAdd extends Component {
               <option value={0}>未上架</option>
               <option value={1}>上架</option>
             </select>
-              {/* 渲染类别 */}
-              
-             
-              {/* <Select showSearch style={{ width: 100 ,marginRight: 50}} 
-                value={type} onChange={(e)=>{
-                  this.setState({type:e.target.value})
-              }}> */}
-                {/* <Option value={1}>类别</Option>
-                <Option value={2}>类别</Option>
-                <Option value={3}>类别</Option> */}
-                {/* {type.map((item,index)=>{
-                  return( <option value={item._id} key={item._id}>{item.kindName}</option>)
-                })} */}
-              {/* </Select> */}
               {/* 缩略图 */}
               缩略图:
                  <input type="file" ref='img'/>
-                <Button  style={{marginLeft: 20}} onClick={this.upload}>上传图片</Button>
+                <Button  style={{marginLeft: 10}} onClick={this.upload}>上传图片</Button>
               <img width='120' height='80' src={config.serverIp+path} alt=""/><br/>
               <Button type="primary" onClick={this.submit}>添加</Button>
             </Card>

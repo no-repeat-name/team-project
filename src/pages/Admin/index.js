@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon } from 'antd';
-import { withRouter } from 'react-router-dom'
+import { Layout, Menu, Icon, Button } from 'antd';
+import { withRouter, Router } from 'react-router-dom'
 import menuList from './menuList'
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function handleClick(e) {
-    // console.log(e);
-
     let { path } = e.item.props
     this.props.history.replace(path)
 }
@@ -16,10 +14,19 @@ function handleClick(e) {
 class Admin extends Component {
     state = {
         collapsed: false,
+        iconLoading: false
     };
 
     onCollapse = collapsed => {
         this.setState({ collapsed });
+    };
+
+    enterIconLoading = () => {
+        this.setState({ iconLoading: true });
+        localStorage.removeItem('admin')
+        localStorage.removeItem('token')
+        this.setState({ iconLoading: false });
+        this.props.history.replace('../login')
     };
 
     renderMenu(data) {
@@ -60,7 +67,16 @@ class Admin extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{ background: 'violet', padding: 0 }} ></Header>
+                    <Header style={{ background: '#fff', padding: 0, textAlign: "right", paddingRight: '10px' }} >
+                        <Button
+                            type="primary"
+                            icon="poweroff"
+                            loading={this.state.iconLoading}
+                            onClick={this.enterIconLoading}
+                        >
+                            退出登录
+                        </Button>
+                    </Header>
                     <Content style={{ margin: '0 16px' }}>
                         {this.props.children}
                     </Content>

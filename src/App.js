@@ -16,11 +16,12 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-        <Redirect exact from='/' to='/admin'></Redirect>
+        <Redirect exact from='/' to='/login'></Redirect>
         <Route path='/login' component={Login}></Route>
         <Route path='/admin' render={() => {
           return (
             <Admin>
+              <Route path='/admin/home' component={Analysis}></Route>
               <Route path='/admin/vip' component={Vip}></Route>
               <Route path='/admin/analysis' component={Analysis}></Route>
               <Route path='/admin/monitoring' component={Monitoring}></Route>

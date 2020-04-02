@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon, Button } from 'antd';
-import { withRouter, Router } from 'react-router-dom'
+import { Layout, Menu, Icon, Button, Spin, Alert } from 'antd';
+import { withRouter } from 'react-router-dom'
 import menuList from './menuList'
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -14,7 +14,8 @@ function handleClick(e) {
 class Admin extends Component {
     state = {
         collapsed: false,
-        iconLoading: false
+        iconLoading: false,
+        spinning: false
     };
 
     onCollapse = collapsed => {
@@ -28,6 +29,13 @@ class Admin extends Component {
         this.setState({ iconLoading: false });
         this.props.history.replace('../login')
     };
+
+    componentDidMount() {
+        this.setState({ spinning: true })
+        let admin = localStorage.getItem('admin')
+        let token = localStorage.getItem('token')
+        if (admin && token) { this.setState({ spinning: false }) }
+    }
 
     renderMenu(data) {
         return data.map((item, index) => {
@@ -59,30 +67,34 @@ class Admin extends Component {
 
     render() {
         return (
-            <Layout style={{ minHeight: '100vh' }}>
-                <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-                    <div className="logo" />
-                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={handleClick.bind(this)}>
-                        {this.renderMenu(menuList)}
-                    </Menu>
-                </Sider>
-                <Layout>
-                    <Header style={{ background: '#fff', padding: 0, textAlign: "right", paddingRight: '10px' }} >
-                        <Button
-                            type="primary"
-                            icon="poweroff"
-                            loading={this.state.iconLoading}
-                            onClick={this.enterIconLoading}
-                        >
-                            退出登录
+            <Spin tip={<span>未检测到登录状态，请先<b style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => {
+                this.props.history.replace('../login')
+            }}>登录</b></span>} spinning={this.state.spinning}>
+                <Layout style={{ minHeight: '100vh' }}>
+                    <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+                        <div className="logo" />
+                        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={handleClick.bind(this)}>
+                            {this.renderMenu(menuList)}
+                        </Menu>
+                    </Sider>
+                    <Layout>
+                        <Header style={{ background: '#fff', padding: 0, textAlign: "right", paddingRight: '10px' }} >
+                            <Button
+                                type="primary"
+                                icon="poweroff"
+                                loading={this.state.iconLoading}
+                                onClick={this.enterIconLoading}
+                            >
+                                退出登录
                         </Button>
-                    </Header>
-                    <Content style={{ margin: '0 16px' }}>
-                        {this.props.children}
-                    </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                        </Header>
+                        <Content style={{ margin: '0 16px' }}>
+                            {this.props.children}
+                        </Content>
+                        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                    </Layout>
                 </Layout>
-            </Layout>
+            </Spin>
         );
     }
 }

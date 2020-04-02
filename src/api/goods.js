@@ -17,6 +17,14 @@ class Goods {
         let url = '/admin/shop/putaway'
         return axios.post(url,{_id,putaway})
     }
+    findOne(_id){
+        let url ='/admin/shop/idfind'
+        return axios.post(url,{_id})
+    }
+    update(_id,payload){
+        let url = '/admin/shop/update'
+        return axios.post(url,payload)
+    }
 }
 
 export default new Goods();

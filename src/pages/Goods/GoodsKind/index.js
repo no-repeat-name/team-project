@@ -59,7 +59,7 @@ class GoodsKind extends Component {
     delGodds=async(_id)=>{
       let {data:{msg,err}}= await goodsApi.del(_id)
       if(err){ return message.error(msg)}
-      // this.getListData()
+      this.getListData()
     }
     render() {
         let {data,columns} =this.state

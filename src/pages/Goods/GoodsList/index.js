@@ -133,20 +133,20 @@ class GoodsList extends Component {
           </select>
           {/* 表格内容 */}
           <Table 
-            scroll={{ y: 300, x: 840 }}
-            pagination={false}
+            scroll={{ y: 260, x: 840 }}
+            // pagination={false}
             columns={columns}
             dataSource={data}
             rowKey='_id'>
           </Table>
           {/* 分页器 */}
-          <Pagination current={page} total={count} showQuickJumper pageSize={pageSize}
+          {/* <Pagination current={page} total={count} showQuickJumper pageSize={pageSize}
             onChange={(page, pageSize) => {
               this.setState({ page }, () => {
                 this.getListData()
               })
             }}
-          />
+          /> */}
         </Card>
       </div>
     );

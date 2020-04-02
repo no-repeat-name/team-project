@@ -8,7 +8,7 @@ class GoodsList extends Component {
     page: 1,//页码数
     pageSize: 2,//每页显示的条数
     data: [], //列表数据
-    count: 0, //总数量
+    allcount: 0, //总数量
     kindList: [],
     columns: [
       { title: '_id', dataIndex: '_id', key: '_id', width: 120, fixed: 'left' },
@@ -91,6 +91,7 @@ class GoodsList extends Component {
     this.setState(kindList)
     //查询成功就返回列表数据
     this.setState(data)
+    this.pagefind()
   }
 
   // 选择类型改变
@@ -109,13 +110,21 @@ class GoodsList extends Component {
     this.setState({ data: result })
   }
 
+  //分页查询
+  pagefind = async()=>{
+    let {page,pageSize} = this.state
+    let {data:{data,allcount}} = await goodsApi.pagefind(page,pageSize)
+    this.setState({data,allcount})
+  }
+
   //发送请求数据
   componentDidMount() {
     this.getListData()
+    this.pagefind()
   }
 
   render() {
-    let { data, columns, count, pageSize, page, kindList } = this.state
+    let { data, columns, allcount, pageSize, page, kindList } = this.state
     
     return (
       <div className={style.box}>
@@ -134,19 +143,19 @@ class GoodsList extends Component {
           {/* 表格内容 */}
           <Table 
             scroll={{ y: 260, x: 840 }}
-            // pagination={false}
+            pagination={false}
             columns={columns}
             dataSource={data}
             rowKey='_id'>
           </Table>
           {/* 分页器 */}
-          {/* <Pagination current={page} total={count} showQuickJumper pageSize={pageSize}
+          <Pagination current={page} total={allcount} showQuickJumper pageSize={pageSize}
             onChange={(page, pageSize) => {
               this.setState({ page }, () => {
                 this.getListData()
               })
             }}
-          /> */}
+          />
         </Card>
       </div>
     );

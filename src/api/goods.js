@@ -25,6 +25,10 @@ class Goods {
         let url = '/admin/shop/update'
         return axios.post(url,payload)
     }
+    pagefind(page=1,pageSize=2){
+        let url = '/admin/shop/pagefind'
+        return axios.post(url,{page,pageSize})
+    }
 }
 
 export default new Goods();

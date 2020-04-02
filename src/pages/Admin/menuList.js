@@ -49,7 +49,13 @@ export default [{
         key: '5-1',
         title: '数据分析',
         path: '/admin/analysis'
-    }]
+    },
+    {
+        key: '5-2',
+        title: '数据监控',
+        path: '/admin/monitoring'
+    }
+]
 }, {
     key: '6',
     icon: 'contacts',
